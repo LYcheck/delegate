@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Item(models.Model):
-    category = models.CharField(max_length=2)
-    title = models.TextField(max_length=10)
+    category = models.CharField(max_length=20)
+    title = models.TextField(max_length=100)
     description = models.TextField(max_length=255)
 
     def __str__(self):
