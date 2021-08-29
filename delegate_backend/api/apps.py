@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DelegateBackendConfig(AppConfig):
+class ApiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'delegate_backend'
+    name = 'api'
