@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Item(models.Model):
+    class Meta:
+        db_table = "Items"
+    
     name = models.CharField(max_length=100, default='None')
     type = models.CharField(max_length=50, default='None')
     description = models.CharField(max_length=255, default='None')
@@ -12,6 +15,9 @@ class Item(models.Model):
         return self.name
     
 class List(models.Model):
+    class Meta:
+        db_table = "Lists"
+
     name = models.CharField(max_length=100, default='None')
     type = models.CharField(max_length=50, default='None')
     description = models.CharField(max_length=255, default='None')
@@ -22,6 +28,9 @@ class List(models.Model):
         return self.name
 
 class User(models.Model):
+    class Meta:
+        db_table = "Users"
+
     username = models.TextField(max_length=255, default='None')
     password = models.TextField(max_length=255, default='None')
     email = models.EmailField(max_length=254, default='None')
@@ -30,6 +39,9 @@ class User(models.Model):
         return self.username
 
 class Event(models.Model):
+    class Meta:
+        db_table = "Events"
+
     name = models.TextField(max_length=255, default='None')
     author = models.CharField(max_length=36, default='None')
     description = models.CharField(max_length=255, default='None')
@@ -41,6 +53,9 @@ class Event(models.Model):
         return self.name
 
 class Group(models.Model):
+    class Meta:
+        db_table = "Groups"
+        
     name = models.TextField(max_length=255, default='None')
     author = models.CharField(max_length=36, default='None')
     description = models.CharField(max_length=255, default='None')

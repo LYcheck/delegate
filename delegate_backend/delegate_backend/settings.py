@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5wdc1t5f^6f0r9wtyqpjek0dw+&$!6+i0s540c-+28zd9aw8sl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True 
 
 ALLOWED_HOSTS = []
 
@@ -83,10 +83,6 @@ DATABASES = {
         'PASSWORD': 'HRRnvlcfvmZvjCEiIX9H',
         'HOST': 'bkf9jairjdtynnt0np53-mysql.services.clever-cloud.com',
         'PORT': '3306'
-    },
-    'sqlite3': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -115,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
