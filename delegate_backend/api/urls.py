@@ -22,12 +22,14 @@ urlpatterns = [
   # ---------- GROUP ----------
   path('get_group/', get_group),
   path('get_groups/', get_groups),
-  path('create_group', create_group),
+  path('create_group/', create_group),
   path('join_group/', join_group),
   path('leave_group/', leave_group),
   path('update_group/', update_group),
 
   # ---------- EVENT ----------
+  path('get_event/', get_event),
+  path('get_events/', get_events),
   path('create_event/', create_event),
   path('add_to_event/', add_to_event),
   path('remove_from_event/', remove_from_event),

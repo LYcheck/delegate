@@ -54,7 +54,7 @@ class Event(models.Model):
 
 class Group(models.Model):
     class Meta:
-        db_table = "Groups"
+        db_table = "Groupss"
         
     name = models.TextField(max_length=255, default='None')
     author = models.CharField(max_length=36, default='None')

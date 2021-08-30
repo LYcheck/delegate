@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from rest_framework.serializers import Serializer
 from .models import *
 from .serializers import *
 from django.core.exceptions import ObjectDoesNotExist
@@ -19,18 +20,32 @@ def welcome(request):
 
 # ---------- LIST ----------
 
-@api_view(["GET"])
+@api_view(["POST"])
 @csrf_exempt
 def get_list(request):
-  
-  return HttpResponse("hello1")
+  payload = json.loads(request.body)
+  try:
+    list_list = list(List.objects.filter(id=payload["id"]).values_list())
+    # serializer = ListSerializer(list_list)
+    return JsonResponse({'list': list_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["GET"])
 @csrf_exempt
-def get_lists(request):
-  return HttpResponse("WEJFOIWEFJEIOWFJOI")
-
+def get_lists(requst):
+  try:
+    list_list = list(List.objects.values_list());
+    # serializer = ListSerializer(list_list)
+    return JsonResponse({'lists': list_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+  
 
 @api_view(["POST"])
 @csrf_exempt
@@ -54,6 +69,7 @@ def create_list(request):
   except Exception:
       return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
 @api_view(["DELETE"])
 @csrf_exempt
 def delete_list(request):
@@ -64,18 +80,33 @@ def delete_list(request):
 def update_list(request):
   return HttpResponse("hello5")
 
-# ---------- ITEM ----------
 
-@api_view(["GET"])
+# ---------- ITEM ----------
+@api_view(["POST"])
 @csrf_exempt
 def get_item(request):
-  return HttpResponse("hello")
+  payload = json.loads(request.body)
+  try:
+    item_list = list(Item.objects.filter(id=payload["id"]).values_list());
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse({'item': item_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["GET"])
 @csrf_exempt
 def get_items(request):
-  return HttpResponse("hello")
+  try:
+    item_list = list(Item.objects.values_list());
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse({'items': item_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["POST"])
@@ -110,18 +141,34 @@ def delete_item(request):
 def update_item(request):
   return HttpResponse("hello")
 
-# ---------- GROUP ----------
 
-@api_view(["GET"])
+# ---------- GROUP ----------
+@api_view(["POST"])
 @csrf_exempt
 def get_group(request):
-  return HttpResponse("hello")
+  payload = json.loads(request.body)
+  try:
+    group_list = list(Group.objects.filter(id=payload["id"]).values_list());
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse({'group': group_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["GET"])
 @csrf_exempt
 def get_groups(request):
-  return HttpResponse("hello")
+  try:
+    group_list = list(Group.objects.values_list());
+    # serializer = GroupSerializer(group_list)
+    return JsonResponse({'groups': group_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(["POST"])
 @csrf_exempt
@@ -157,7 +204,35 @@ def leave_group(request):
 def update_group(request):
   return HttpResponse("hello")
 
+
 # ---------- EVENT ----------
+@api_view(["POST"])
+@csrf_exempt
+def get_event(request):
+  payload = json.loads(request.body)
+  try:
+    event_list = list(Event.objects.filter(id=payload["id"]).values_list());
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse({'event': event_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["GET"])
+@csrf_exempt
+def get_events(request):
+  try:
+    event_list = list(Event.objects.values_list());
+    # serializer = EventSerializer(event_list)
+    return JsonResponse({'events': event_list}, safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 @api_view(["POST"])
 @csrf_exempt
 def create_event(request):
@@ -178,6 +253,7 @@ def create_event(request):
   except Exception:
     return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
 @api_view(["POST"])
 @csrf_exempt
 def add_to_event(request):
@@ -194,8 +270,8 @@ def remove_from_event(request):
 def update_event(request):
   return HttpResponse("hello")
 
-# ---------- ADMIN ----------
 
+# ---------- ADMIN ----------
 @api_view(["POST"])
 @csrf_exempt
 def login_submit(request):
@@ -212,3 +288,4 @@ def signup_submit(request):
 @csrf_exempt
 def signout_submit(request):
   return HttpResponse("hello")
+  
