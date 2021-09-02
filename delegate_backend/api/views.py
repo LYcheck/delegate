@@ -78,7 +78,17 @@ def delete_list(request):
 
 @api_view(["PUT"])
 def update_list(request):
-  return HttpResponse("hello5")
+  payload = json.loads(request.body)
+  list_id = payload["id"]
+  del payload["id"]
+  try:
+    Item.objects.filter(id=list_id).update(**payload)
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse("Update Successful", safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # ---------- ITEM ----------
@@ -139,7 +149,17 @@ def delete_item(request):
 
 @api_view(["PUT"])
 def update_item(request):
-  return HttpResponse("hello")
+  payload = json.loads(request.body)
+  item_id = payload["id"]
+  del payload["id"]
+  try:
+    Item.objects.filter(id=item_id).update(**payload)
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse("Update Successful", safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # ---------- GROUP ----------
@@ -148,7 +168,7 @@ def update_item(request):
 def get_group(request):
   payload = json.loads(request.body)
   try:
-    group_list = list(Group.objects.filter(id=payload["id"]).values_list());
+    group_list = list(Group.objects.filter(id=payload["id"]).values_list())
     # serializer = ItemSerializer(list_list)
     return JsonResponse({'group': group_list}, safe=False, status=status.HTTP_200_OK)
   except ObjectDoesNotExist as e:
@@ -202,7 +222,17 @@ def leave_group(request):
 
 @api_view(["PUT"])
 def update_group(request):
-  return HttpResponse("hello")
+  payload = json.loads(request.body)
+  group_id = payload["id"]
+  del payload["id"]
+  try:
+    Item.objects.filter(id=group_id).update(**payload)
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse("Update Successful", safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # ---------- EVENT ----------
@@ -268,7 +298,17 @@ def remove_from_event(request):
 
 @api_view(["PUT"])
 def update_event(request):
-  return HttpResponse("hello")
+  payload = json.loads(request.body)
+  event_id = payload["id"]
+  del payload["id"]
+  try:
+    Item.objects.filter(id=event_id).update(**payload)
+    # serializer = ItemSerializer(list_list)
+    return JsonResponse("Update Successful", safe=False, status=status.HTTP_200_OK)
+  except ObjectDoesNotExist as e:
+    return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+  except Exception:
+    return JsonResponse({'error': error_message}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # ---------- ADMIN ----------
